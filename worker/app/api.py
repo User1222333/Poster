@@ -687,7 +687,8 @@ def get_project(project_id: str, ctx: Ctx = Depends(current_ctx)):
         blockers.append("Reguły, szablon lub dane zmieniły się od ostatniej walidacji — uruchom ją ponownie.")
     for g in groups:
         if g["severity"] in ("BLOCKER", "REVIEW"):
-            col = f" [{labels.get(g['target_column'], g['target_column'])}]" if g["target_column"] else ""
+            label = labels.get(g["target_column"], g["target_column"]) if g["target_column"] else ""
+            col = f" [{label}]" if label and label not in g["sample"] else ""
             blockers.append(f"{g['sample']}{col} — {g['rows']} prod.")
     return {**project, "stale": stale,
             "readiness_percent": round(100 * c.get("ready", 0) / active) if active and not stale else 0,

@@ -8,7 +8,9 @@ import openpyxl
 import pytest
 from conftest import FIXTURES
 
-from app.engine import exporter, rules, source_parser as sp, template_parser as tp, validate
+from app.engine import exporter, rules, validate
+from app.engine import source_parser as sp
+from app.engine import template_parser as tp
 from app.engine.aliases import suggest_column_map
 from app.engine.canonical import build_product, duplicate_issues, source_issues
 from app.engine.gtin import validate_gtin
