@@ -129,6 +129,10 @@ def project_issues(template: dict, has_rules: bool) -> list[dict]:
                           "czy ofert.", None))
     if not has_rules:
         out.append(_issue("BLOCKER", "NO_RULES", "Brak zapisanych reguł mapowania.", None))
+    unknown = sum(1 for r in (template.get("requirements") or {}).values() if r.get("required") is None)
+    if template.get("confirmed") and unknown:
+        out.append(_issue("WARNING", "REQUIREMENTS_PARTIAL", f"{unknown} kolumn szablonu ma nieustaloną wymagalność "
+                          "(potwierdzono traktowanie ich jako niewymaganych). Sprawdź dokumentację rynku.", None))
     if template.get("is_demo_fixture"):
         out.append(_issue("WARNING", "DEMO_TEMPLATE", "Szablon demonstracyjny (fixture testowy). Wynik NIE jest "
                           "plikiem gotowym do wysłania na marketplace.", None))
