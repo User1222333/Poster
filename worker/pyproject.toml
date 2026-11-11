@@ -1,0 +1,18 @@
+[project]
+name = "mdb-worker"
+version = "0.1.0"
+description = "Marketplace Data Bridge — deterministyczny silnik przetwarzania katalogów (bez AI)"
+requires-python = ">=3.12"
+dependencies = []  # patrz requirements.txt
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 125
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "S"]
+ignore = ["E501", "S101", "S608", "B008", "S105", "S106"]
